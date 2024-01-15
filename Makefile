@@ -1,35 +1,17 @@
-make all:
+CC = g++
+CFLAGS = -Wall -std=c++11 -w
+LDFLAGS = -lGL -lGLU -lglut -lfreeimage
 
-	g++ rope.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
-	
-make all1:
+SRC = main.cpp
+OUT = video
 
-	g++ rope1.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
+all: $(OUT)
 
-make all2:
+$(OUT): $(SRC)
+	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
 
-	g++ rope2.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
-	
-make all3:
+run: $(OUT)
+	./$(OUT)
 
-	g++ lg.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
-	
-make all4:
-
-	g++ lg1.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
-	
-make all5:
-
-	g++ lg3.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
-	
-make all6:
-	g++ lg4.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
-	
-make all7:
-	g++ lg5.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
-	
-make all8:
-	g++ lg6.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
-	
-make all9:
-	g++ rope3.cpp -o out -lGL -lGLU -lglut -lfreeimage  && ./out
+clean:
+	rm -f $(OUT)
