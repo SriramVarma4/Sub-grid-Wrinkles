@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <Eigen/Core>
 
 
 #ifndef LAGRANGIAN_H
@@ -91,6 +92,32 @@ class Lagrangian{
 
         virtual void run() = 0;
 };
+
+class Lagrangian2 {
+protected:
+    Eigen::VectorXf q_k;
+    Eigen::VectorXf dq_k;
+    Eigen::VectorXf p_k;
+
+public:
+    Lagrangian2(const Eigen::VectorXf& q, const Eigen::VectorXf& dq, const Eigen::VectorXf& p)
+        : q_k(q), dq_k(dq), p_k(p) {}
+
+    virtual ~Lagrangian2() {}
+
+    virtual float L_evaluate(const Eigen::VectorXf& q, const Eigen::VectorXf& dq) = 0;
+
+    virtual Eigen::VectorXf dldq(const Eigen::VectorXf& q, const Eigen::VectorXf& dq) = 0;
+
+    virtual Eigen::VectorXf dldq_2(const Eigen::VectorXf& q, const Eigen::VectorXf& dq) = 0;
+
+    virtual Eigen::VectorXf solveD1Ld(const Eigen::VectorXf& q, const Eigen::VectorXf& p, const std::vector<std::vector<particles>>& sParticles) = 0;
+
+    virtual Eigen::VectorXf solveD2Ld(const Eigen::VectorXf& q, const Eigen::VectorXf& fq, const std::vector<std::vector<particles>>& sParticles) = 0;
+
+    virtual void run() = 0;
+};
+
 
 
 #endif

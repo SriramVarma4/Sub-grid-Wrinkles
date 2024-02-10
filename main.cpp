@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+// #include <Eigen/Dense>
 
 #include "lagrangian.h"
 #include "cloth.h"
